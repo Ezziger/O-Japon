@@ -19,7 +19,7 @@ class CreateLieusTable extends Migration
             $table->string('nom', 50);
             $table->float('prix', 6, 2);
             $table->timestamps();
-            $table->tinyText('map');
+            $table->text('map')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('categorie_id');
