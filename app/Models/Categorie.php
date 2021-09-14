@@ -18,4 +18,8 @@ class Categorie extends Model
     protected $fillable = [
         'nom'
     ];
+
+    public function lieu() {
+        return $this->belongsToMany('App\Lieux');
+    }
 }

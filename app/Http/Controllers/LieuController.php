@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Region;
 use App\Models\Categorie;
 use App\Models\Lieu;
+use App\Models\Commentaire;
 use Illuminate\Http\Request;
 
 class LieuController extends Controller
@@ -70,7 +71,9 @@ class LieuController extends Controller
      */
     public function show($id)
     {
-        //
+        $lieu = Lieu::find($id);
+        $commentaires = Commentaire::all();
+        return view('lieux.show', compact('lieu', 'commentaires'));
     }
 
     /**

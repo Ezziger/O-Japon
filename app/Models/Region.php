@@ -18,4 +18,8 @@ class Region extends Model
     protected $fillable = [
         'nom'
     ];
+
+    public function lieu() {
+        return $this->belongsToMany('App\Lieux');
+    }
 }
