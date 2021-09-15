@@ -24,4 +24,20 @@ class Lieu extends Model
         'categorie_id',
         'region_id'
     ];
+
+    public function categorie() {
+        return $this->hasOne(Categorie::class);
+    }
+
+    public function commentaire() {
+        return $this->hasMany(Commentaire::class);
+    }
+
+    public function region() {
+        return $this->hasOne(Region::class);
+    }
+
+    public function lieu() {
+        return $this->belongsTo(User::class);
+    }
 }

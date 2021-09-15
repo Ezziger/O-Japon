@@ -21,4 +21,17 @@ class Commentaire extends Model
         'lieu_id',
         'parent_id'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function lieu() {
+        return $this->belongsTo(Lieu::class);
+    }
+
+    public function replies() {
+        return $this->hasMany(Commentaire::class, 'parent_id');
+    }
+
 }

@@ -20,6 +20,6 @@ class Categorie extends Model
     ];
 
     public function lieu() {
-        return $this->belongsToMany('App\Lieux');
+        return $this->belongsToMany(Lieu::class);
     }
 }
