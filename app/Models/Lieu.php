@@ -29,7 +29,7 @@ class Lieu extends Model
         return $this->hasOne(Categorie::class);
     }
 
-    public function commentaire() {
+    public function commentaires() {
         return $this->hasMany(Commentaire::class);
     }
 

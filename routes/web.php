@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\CommentaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::resource('lieux', LieuController::class);
 Route::resource('categories', CategorieController::class);
 
 Route::resource('regions', RegionController::class);
+
+Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
