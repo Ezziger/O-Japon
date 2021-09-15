@@ -73,7 +73,9 @@ class LieuController extends Controller
     {
         $lieu = Lieu::find($id);
         $commentaires = Commentaire::all();
-        return view('lieux.show', compact('lieu', 'commentaires'));
+        $categorie = Categorie::find($id);
+        $region = Region::find($id);
+        return view('lieux.show', compact('lieu', 'commentaires', 'categorie', 'region'));
     }
 
     /**
