@@ -30,7 +30,7 @@ class Lieu extends Model
     }
 
     public function commentaires() {
-        return $this->hasMany(Commentaire::class);
+        return $this->hasMany(Commentaire::class)->whereNull('parent_id');
     }
 
     public function region() {

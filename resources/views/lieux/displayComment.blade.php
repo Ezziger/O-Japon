@@ -1,6 +1,6 @@
 @foreach($commentaires as $commentaire)
-    <div class="display-comment" @if($commentaire->parent_id != null) style="margin-left:40px;" @endif>
-        <strong>{{ $commentaire->user->name }}</strong>
+    <div class="display-comment" @if($commentaire->parent_id != null) style="margin-left:30px;" @endif>
+        <strong>{{ $commentaire->user->prenom }} {{ $commentaire->user->nom }}</strong>
         <p>{{ $commentaire->commentaire }}</p>
         <a href="" id="reply"></a>
         <form method="post" action="{{ route('commentaires.store') }}">
