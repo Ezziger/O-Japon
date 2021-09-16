@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class LieuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +25,7 @@ class LieuController extends Controller
         $lieux = Lieu::join('categories', 'lieus.categorie_id', '=', 'categories.id')
                      ->join('regions', 'lieus.region_id', '=', 'regions.id')
                      ->join('users', 'lieus.user_id', '=', 'users.id')
-                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg')
+                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.user_id', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg')
                      ->get();
         return view('lieux.index', compact('lieux'));
     }
@@ -86,7 +91,10 @@ class LieuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lieu = Lieu::findOrFail($id);
+        $categories = Categorie::all();
+        $regions = Region::all();
+        return view('lieux.edit', compact('lieu', 'categories', 'regions'));
     }
 
     /**
@@ -98,8 +106,28 @@ class LieuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $majLieu = $request->validate([
+            'image' => 'required',
+            'nom' => 'required',
+            'prix' => 'required',
+            'map' => 'required',
+            'categorie_id' => 'required',
+            'region_id' => 'required',
+        ]);
+
+        $majLieu = $request->except('_token', '_method');
+
+        if($request->image) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $majLieu['image'] = "/images/" . $imageName;
+        }
+
+        Lieu::whereId($id)->update($majLieu);
+        return redirect()->route('lieux.index')
+                         ->with('success', 'Votre lieu a été modifié avec succès !');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -109,6 +137,10 @@ class LieuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lieu = Lieu::findOrFail($id);
+        $lieu->delete();
+        return redirect()->route('lieux.index')
+                         ->with('success', 'Le lieu a bien été supprimé !');
     }
+
 }

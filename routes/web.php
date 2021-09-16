@@ -18,10 +18,6 @@ use App\Http\Controllers\CommentaireController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('dashboard', [ClientAuthController::class, 'dashboard']); 
 Route::get('login', [ClientAuthController::class, 'index'])->name('login');
 Route::post('client-login', [ClientAuthController::class, 'clientLogin'])->name('login.client'); 
@@ -31,8 +27,12 @@ Route::get('signout', [ClientAuthController::class, 'signOut'])->name('signout')
 
 Route::resource('lieux', LieuController::class);
 
-Route::resource('categories', CategorieController::class);
+Route::group(['middleware' => 'auth'], function() {
+    
+    Route::resource('categories', CategorieController::class);
+    
+    Route::resource('regions', RegionController::class);
+    
+    Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
+});
 
-Route::resource('regions', RegionController::class);
-
-Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');

@@ -2,36 +2,72 @@
 
 @section('content')
 
+@guest
 <div class="container">
     <div class="row">
         @foreach($lieux as $lieu)
-        
-        <div class="card col-md-3 m-4" style="width: 18rem;">
-            <img src="{{ $lieu->image }}" class="card-img-top" alt="{{ $lieu->nom }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ $lieu->nom }}</h5>
-                <p class="card-text">{{ $lieu->reg }}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{ $lieu->cat }}</li>
-                <li class="list-group-item">{{ $lieu->prix }}</li>
-                <li class="list-group-item">Posté par {{ $lieu->name }}</li>        
-                <li>
 
-                    {!! $lieu->map !!}
-                </li>
-            </ul>
-            <div class="card-body">
-            <a href="{{ route('lieux.show', $lieu->id) }}" class="btn btn-primary">View Post</a>
-                <a href="{{ route('lieux.edit', $lieu->id) }}" class="card-link">Editer</a>
-                <form action="{{ route('lieux.destroy', $lieu->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-primary btn-sm" type="submit">Supprimer</button>
-                </form>
+        <div class="card col-md-11 m-2">
+            <div class="row">
+                <div class="card col-md-4">
+                    <img src="{{ $lieu->image }}" class="card-img-top" alt="{{ $lieu->nom }}">
+                </div>
+                <div class="card col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $lieu->nom }}</h5>
+                        <p class="card-text">{{ $lieu->reg }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ $lieu->cat }}</li>
+                        <li class="list-group-item">{{ $lieu->prix }}</li>
+                        <li class="list-group-item">Posté par {{ $lieu->name }}</li>
+                        <li>
+                            {!! $lieu->map !!}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         @endforeach
     </div>
 </div>
-@endsection
+@else
+<div class="container">
+    <div class="row">
+        @foreach($lieux as $lieu)
+
+        <div class="card col-md-12 m-2">
+            <div class="row">
+                <div class="card col-md-4">
+                    <img src="{{ $lieu->image }}" class="card-img-top" alt="{{ $lieu->nom }}">
+                </div>
+                <div class="card col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $lieu->nom }}</h5>
+                        <p class="card-text">{{ $lieu->reg }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ $lieu->cat }}</li>
+                        <li class="list-group-item">{{ $lieu->prix }}</li>
+                        <li class="list-group-item">Posté par {{ $lieu->name }}</li>
+                        <li>
+                            {!! $lieu->map !!}
+                        </li>
+                    </ul>
+                    <div class="card-body d-flex">
+                        <a href="{{ route('lieux.show', $lieu->id) }}" class="btn btn-primary">View Post</a>
+                        <div @if(auth()->user()->id !== $lieu->user_id) style="display: none;" @endif>
+                            <a href="{{route('lieux.edit', $lieu->id)}}" class="btn btn-primary">Editer</a>
+                            <form action="{{ route('lieux.destroy', $lieu->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-primary btn-sm" type="submit">Supprimer</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endguest
+        @endsection
