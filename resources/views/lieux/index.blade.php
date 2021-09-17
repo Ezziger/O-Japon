@@ -56,14 +56,18 @@
                     </ul>
                     <div class="card-body d-flex">
                         <a href="{{ route('lieux.show', $lieu->id) }}" class="btn btn-primary">View Post</a>
-                        <div @if(auth()->user()->id !== $lieu->user_id) style="display: none;" @endif>
+                        <div>
+                            @can('update', $lieu)
                             <a href="{{route('lieux.edit', $lieu->id)}}" class="btn btn-primary">Editer</a>
+                            @endcan
+                            @can('delete', $lieu)
                             <form action="{{ route('lieux.destroy', $lieu->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-primary btn-sm" type="submit">Supprimer</button>
+                            </form>
+                            @endcan
                         </div>
-                        </form>
                     </div>
                 </div>
                 @endforeach

@@ -51,4 +51,9 @@ class User extends Authenticatable
         return $this->hasMany(Commentaire::class);
     }
 
+    /***** L'UTILISATEUR EST-IL LE PROPRIETAIRE DE LA PUBLICATION *****/
+    public function isTheOwner() {
+        return false;
+    }
+
 }

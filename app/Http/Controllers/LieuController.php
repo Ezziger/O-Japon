@@ -89,8 +89,9 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Lieu $lieu)
     {
+        $this->authorize('update', $lieu);
         $lieu = Lieu::findOrFail($id);
         $categories = Categorie::all();
         $regions = Region::all();
@@ -104,8 +105,9 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Lieu $lieu)
     {
+        $this->authorize('update', $lieu);
         $majLieu = $request->validate([
             'image' => 'required',
             'nom' => 'required',
@@ -135,8 +137,9 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Lieu $lieu)
     {
+        $this->authorize('delete', $lieu);
         $lieu = Lieu::findOrFail($id);
         $lieu->delete();
         return redirect()->route('lieux.index')
