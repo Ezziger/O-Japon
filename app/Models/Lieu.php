@@ -40,4 +40,9 @@ class Lieu extends Model
     public function lieu() {
         return $this->belongsTo(User::class);
     }
+
+/* A faire vérifier (comptage des commentaires + reponses) */
+    public function commentaires_reponses() {
+        return $this->hasMany(Commentaire::class); 
+    }
 }

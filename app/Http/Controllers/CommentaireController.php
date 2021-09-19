@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Commentaire;
 
+
 class CommentaireController extends Controller
 {
     public function store(Request $req) {
@@ -17,5 +18,13 @@ class CommentaireController extends Controller
 
         Commentaire::create($input);
         return back();
+    }
+
+    public function destroy($id)
+    {
+        $commentaire = Commentaire::findOrfail($id);
+        $commentaire->delete();
+        return redirect()->route('lieux.show')
+                         ->with('success', 'Votre commentaire a bien été supprimée');
     }
 }

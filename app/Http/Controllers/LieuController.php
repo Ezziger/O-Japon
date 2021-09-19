@@ -6,6 +6,7 @@ use App\Models\Region;
 use App\Models\Categorie;
 use App\Models\Lieu;
 use App\Models\Commentaire;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LieuController extends Controller
@@ -25,7 +26,8 @@ class LieuController extends Controller
         $lieux = Lieu::join('categories', 'lieus.categorie_id', '=', 'categories.id')
                      ->join('regions', 'lieus.region_id', '=', 'regions.id')
                      ->join('users', 'lieus.user_id', '=', 'users.id')
-                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.user_id', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg')
+                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg', 'users.id as u')
+                     ->withCount('commentaires_reponses')
                      ->get();
         return view('lieux.index', compact('lieux'));
     }
@@ -89,13 +91,14 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Lieu $lieu)
+    public function edit($id, Lieu $lieu, User $user) 
     {
-        $this->authorize('update', $lieu);
+        $user = User::findOrFail($id);
         $lieu = Lieu::findOrFail($id);
+        $this->authorize('update', $lieu);
         $categories = Categorie::all();
         $regions = Region::all();
-        return view('lieux.edit', compact('lieu', 'categories', 'regions'));
+        return view('lieux.edit', compact('user', 'lieu', 'categories', 'regions'));
     }
 
     /**
@@ -107,6 +110,7 @@ class LieuController extends Controller
      */
     public function update(Request $request, $id, Lieu $lieu)
     {
+        $lieu = Lieu::findOrFail($id);
         $this->authorize('update', $lieu);
         $majLieu = $request->validate([
             'image' => 'required',
@@ -116,15 +120,15 @@ class LieuController extends Controller
             'categorie_id' => 'required',
             'region_id' => 'required',
         ]);
-
+        
         $majLieu = $request->except('_token', '_method');
-
+        
         if($request->image) {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images'), $imageName);
             $majLieu['image'] = "/images/" . $imageName;
         }
-
+        
         Lieu::whereId($id)->update($majLieu);
         return redirect()->route('lieux.index')
                          ->with('success', 'Votre lieu a été modifié avec succès !');
@@ -139,11 +143,10 @@ class LieuController extends Controller
      */
     public function destroy($id, Lieu $lieu)
     {
-        $this->authorize('delete', $lieu);
         $lieu = Lieu::findOrFail($id);
+        $this->authorize('delete', $lieu);
         $lieu->delete();
         return redirect()->route('lieux.index')
                          ->with('success', 'Le lieu a bien été supprimé !');
     }
-
 }

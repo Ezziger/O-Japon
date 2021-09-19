@@ -79,7 +79,8 @@ i {
 
 .container article:nth-child(2n+1) .postcard_img {
     border-radius: 10px 0 0 10px;
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
     height: 30vh;
     width: 15vw;
 }
@@ -90,7 +91,8 @@ i {
 
 .container article:nth-child(2n+0) .postcard_img {
     border-radius: 0 10px 10px 0;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
     height: 30vh;
     width: 15vw;
 }

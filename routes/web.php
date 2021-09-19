@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function() {
     
     Route::resource('regions', RegionController::class);
     
+    Route::delete('commentaires', [CommentaireController::class, 'destroy'])->name('commentaires.destroy');
     Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
+
 });
 

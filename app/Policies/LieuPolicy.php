@@ -53,7 +53,7 @@ class LieuPolicy
      */
     public function update(User $user, Lieu $lieu)
     {
-        return $user->id === $lieu->user_id;
+        return $user->id == $lieu->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class LieuPolicy
      */
     public function delete(User $user, Lieu $lieu)
     {
-        return $user->id === $lieu->user_id;
+        return $user->id == $lieu->user_id;
     }
 
     /**
