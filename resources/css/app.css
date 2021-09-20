@@ -15,8 +15,11 @@ i {
     padding-right: 8px;
 }
 
-.container {
+.conteneur {
     padding: 0 !important;
+    margin: 0 auto;
+    width: 55vw;
+    height: auto;
 }
 
 .postcard_details {
@@ -66,9 +69,9 @@ i {
 }
 
 .postcard_body p {
+    margin-top: 0.5rem;
     padding: 0 2.5rem;
 }
-
 
 .informations {
     display: flex;
@@ -78,25 +81,25 @@ i {
     margin: 0 1rem 0 0;
 }
 
-.container article:nth-child(2n+1) .postcard_img {
+.conteneur article:nth-child(2n+1) .postcard_img {
     border-radius: 10px 0 0 10px;
     clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-    height: 30vh;
+    height: 35vh;
     width: 15vw;
 }
 
-.container article:nth-child(2n+1) {
+.conteneur article:nth-child(2n+1) {
     flex-direction: row;
 }
 
-.container article:nth-child(2n+0) .postcard_img {
+.conteneur article:nth-child(2n+0) .postcard_img {
     border-radius: 0 10px 10px 0;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
-    height: 30vh;
+    height: 35vh;
     width: 15vw;
 }
 
-.container article:nth-child(2n+0) {
+.conteneur article:nth-child(2n+0) {
     flex-direction: row-reverse;
 }
 
@@ -109,7 +112,6 @@ i {
 .btn {
     font-weight: 600;
     border: 2px solid black;
-    
 }
 
 .postcard_bot_body {

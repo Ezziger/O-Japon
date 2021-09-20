@@ -26,7 +26,7 @@ class LieuController extends Controller
         $lieux = Lieu::join('categories', 'lieus.categorie_id', '=', 'categories.id')
                      ->join('regions', 'lieus.region_id', '=', 'regions.id')
                      ->join('users', 'lieus.user_id', '=', 'users.id')
-                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.alt_image','lieus.description', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg', 'users.id as u')
+                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.alt_image','lieus.description', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg', 'users.id as u', 'users.role_id as role_id')
                      ->withCount('commentaires_reponses')
                      ->get();
         return view('lieux.index', compact('lieux'));
@@ -93,9 +93,11 @@ class LieuController extends Controller
      */
     public function edit($id) 
     {
-        $lieux = Lieu::findOrFail($id);
-        $this->authorize('update', $lieux);
-        return view('lieux.edit', compact('lieux'));
+        $lieu = Lieu::findOrFail($id);
+        $regions = Region::all();
+        $categories = Categorie::all();
+        $this->authorize('update', $lieu);
+        return view('lieux.edit', compact('lieu', 'regions', 'categories'));
     }
 
     /**
