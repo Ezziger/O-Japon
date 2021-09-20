@@ -44,11 +44,15 @@ class User extends Authenticatable
     ];
 
     public function lieu() {
-        return $this->hasMany('App\Lieux');
+        return $this->hasMany(Lieu::class);
     }
 
     public function commentaire() {
         return $this->hasMany(Commentaire::class);
+    }
+
+    public function role() {
+        return $this->hasOne(Role::class);
     }
 
 }

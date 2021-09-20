@@ -1,6 +1,14 @@
 @extends('dashboard')
 
-   
+@section('title')
+{{$lieu->nom}}
+@endsection
+
+@section('metadescription')
+{{$lieu->meta_description}}
+@endsection
+
+
 @section('content')
 
 <div class="container">
@@ -10,8 +18,8 @@
                 <div class="card-body">
                     <h3 class="text-center text-success">{{$lieu->nom}}</h3>
                     <img src="{{ $lieu->image }}" class="card-img-top" alt="{{ $lieu->nom }}">
-                    <p>{{ $categorie->nom }}</p>
-                    <p>{{ $region->nom }}</p>
+                    <p>{{ $lieu->categorie->nom}}</p>
+                    <p>{{ $lieu->region->nom }}</p>
 
                     <hr />
                     <h4>Display Comments</h4>

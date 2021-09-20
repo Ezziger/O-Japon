@@ -16,7 +16,9 @@ class Lieu extends Model
      */
     protected $fillable = [
         'image',
+        'alt_image',
         'nom',
+        'description',
         'prix',
         'map',
         'password',
@@ -26,7 +28,7 @@ class Lieu extends Model
     ];
 
     public function categorie() {
-        return $this->hasOne(Categorie::class);
+        return $this->belongsTo(Categorie::class);
     }
 
     public function commentaires() {
@@ -34,10 +36,10 @@ class Lieu extends Model
     }
 
     public function region() {
-        return $this->hasOne(Region::class);
+        return $this->belongsTo(Region::class);
     }
 
-    public function lieu() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 

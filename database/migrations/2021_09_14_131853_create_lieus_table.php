@@ -15,8 +15,11 @@ class CreateLieusTable extends Migration
     {
         Schema::create('lieus', function (Blueprint $table) {
             $table->id();
+            $table->string('meta_description', 160)->nullable();
             $table->string('image', 60);
+            $table->string('alt_image', 50);
             $table->string('nom', 50);
+            $table->text('description');
             $table->float('prix', 6, 2);
             $table->timestamps();
             $table->text('map')->nullable();

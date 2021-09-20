@@ -26,7 +26,7 @@ class LieuController extends Controller
         $lieux = Lieu::join('categories', 'lieus.categorie_id', '=', 'categories.id')
                      ->join('regions', 'lieus.region_id', '=', 'regions.id')
                      ->join('users', 'lieus.user_id', '=', 'users.id')
-                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg', 'users.id as u')
+                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.alt_image','lieus.description', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg', 'users.id as u')
                      ->withCount('commentaires_reponses')
                      ->get();
         return view('lieux.index', compact('lieux'));
@@ -60,7 +60,9 @@ class LieuController extends Controller
 
         $newLieu = new Lieu;
         $newLieu->image = '/images/' . $imageName;
+        $newLieu->alt_image = $request->alt_image;
         $newLieu->nom = $request->nom;
+        $newLieu->description = $request->description;
         $newLieu->prix = $request->prix;
         $newLieu->map = $request->map;
         $newLieu->user_id = auth()->user()->id;
@@ -78,11 +80,9 @@ class LieuController extends Controller
      */
     public function show($id)
     {
-        $lieu = Lieu::find($id);
+        $lieu = Lieu::findOrFail($id);
         $commentaires = Commentaire::all();
-        $categorie = Categorie::find($id);
-        $region = Region::find($id);
-        return view('lieux.show', compact('lieu', 'commentaires', 'categorie', 'region'));
+        return view('lieux.show', compact('lieu', 'commentaires'));
     }
 
     /**
@@ -91,14 +91,11 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Lieu $lieu, User $user) 
+    public function edit($id) 
     {
-        $user = User::findOrFail($id);
-        $lieu = Lieu::findOrFail($id);
-        $this->authorize('update', $lieu);
-        $categories = Categorie::all();
-        $regions = Region::all();
-        return view('lieux.edit', compact('user', 'lieu', 'categories', 'regions'));
+        $lieux = Lieu::findOrFail($id);
+        $this->authorize('update', $lieux);
+        return view('lieux.edit', compact('lieux'));
     }
 
     /**
@@ -114,6 +111,7 @@ class LieuController extends Controller
         $this->authorize('update', $lieu);
         $majLieu = $request->validate([
             'image' => 'required',
+            'alt_image' => 'required',
             'nom' => 'required',
             'prix' => 'required',
             'map' => 'required',

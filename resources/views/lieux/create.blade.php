@@ -17,9 +17,18 @@
                 <input type="file" class="form-control" id="image" name="image" required>
             </div>
             <div class="col mb-3">
+                <label for="alt_image" class="form-label">Courte description de votre image</label>
+                <input type="text" class="form-control" id="alt_image" name="alt_image" required>
+            </div>
+            <div class="col mb-3">
                 <label for="nom" class="form-label">Nom du lieu</label>
                 <input type="text" class="form-control" id="nom" name="nom" required>
             </div>
+            <div class="col mb-3">
+                <label for="description" class="form-label">Description du lieu</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+
             <div class="col mb-3">
                 <label for="region_id" class="form-label">Region du Japon dans laquelle se trouve le lieu</label>
                 <select class="form-control" name="region_id" id="region_id" required>
