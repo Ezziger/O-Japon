@@ -20,11 +20,13 @@ class CommentaireController extends Controller
         return back();
     }
 
-    public function destroy($id)
-    {
-        $commentaire = Commentaire::findOrfail($id);
+    public function edit() {
+
+    }
+
+    public function destroy(Commentaire $commentaire, $id) {
+        $commentaire = Commentaire::findOrFail($id);
         $commentaire->delete();
-        return redirect()->route('lieux.show')
-                         ->with('success', 'Votre commentaire a bien été supprimée');
+        return back()->with('success', 'Votre commentaire a bien été supprimée');
     }
 }

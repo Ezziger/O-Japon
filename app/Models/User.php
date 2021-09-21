@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function estAdministrateur() {
-        return auth()->user()->role->nom == 'administateur';
+        return $this->role->nom == 'administrateur';
     }
 
 }

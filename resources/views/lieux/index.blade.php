@@ -22,8 +22,7 @@
             <ul class="informations">
                 <li><i class="fas fa-map"></i>{{ $lieu->reg }}</li>
                 <li><i class="fas fa-monument"></i>{{ $lieu->cat }}</li>
-                <!--<i class="fas fa-utensils"></i> categorie Restaurant // <i class="fas fa-basketball-ball"></i> categorie Loisir -->
-                <li><i class="fas fa-yen-sign"></i>{{ $lieu->prix }}</li>
+                <li>Prix : {{ $lieu->prix }}<i class="fas fa-yen-sign"></i></li>
                 <li><i class="fas fa-comment"></i>{{ $lieu->commentaires_reponses_count }}</li>
             </ul>
         </div>
@@ -55,8 +54,7 @@
                     @elseif ($lieu->cat == 'Divertissements')
                     <li><i class="fas fa-theater-masks"></i>{{ $lieu->cat }}</li>
                     @endif
-                    <!--<i class="fas fa-utensils"></i> categorie Restaurant // <i class="fas fa-theater-masks"></i> categorie Loisir -->
-                    <li><i class="fas fa-yen-sign"></i>{{ $lieu->prix }}</li>
+                    <li>Prix : {{ $lieu->prix }} <i class="fas fa-yen-sign"></i></li>
                     <li><i class="fas fa-comment"></i>{{ $lieu->commentaires_reponses_count }}</li>
                 </ul>
                 <ul class="button_location">

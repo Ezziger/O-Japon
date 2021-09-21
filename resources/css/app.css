@@ -39,7 +39,7 @@ i {
 }
 
 .light {
-    background: linear-gradient(135deg, rgba(2, 0, 36, 0) 0%, rgba(254, 230, 230, 0.25) 75%, rgba(254, 230, 230, 0.50) 100%);
+    background: linear-gradient(135deg, rgba(2, 0, 36, 0) 0%, rgba(254, 230, 230, 0.25) 75%, rgba(252, 230, 254, 0.5) 100%);
 }
 
 .postcard_creation {
@@ -60,12 +60,12 @@ i {
     border-radius: 10px;
     margin-top: 0.5rem;
     margin-left: 2.5rem;
-    transition: linear 0.5s;
+    transition: all linear 0.2s;
 }
 
 .postcard:hover .postcard_bar {
     width: 150px;
-    transition: linear 0.5s;
+    transition: all linear 0.2s;
 }
 
 .postcard_body p {
@@ -75,6 +75,7 @@ i {
 
 .informations {
     display: flex;
+    font-weight: bold;
 }
 
 .informations li {
