@@ -29,4 +29,8 @@ class CommentaireController extends Controller
         $commentaire->delete();
         return back()->with('success', 'Votre commentaire a bien été supprimée');
     }
+
+    public function editing() {
+        return false;
+    }
 }

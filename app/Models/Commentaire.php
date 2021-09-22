@@ -33,5 +33,4 @@ class Commentaire extends Model
     public function replies() {
         return $this->hasMany(Commentaire::class, 'parent_id');
     }
-
 }
