@@ -153,8 +153,10 @@ class LieuController extends Controller
     public function search() {
         $q = request()->input('q');
 
-        Lieu::Where("name", "like", "% $q %")
-            ->orWhere("description", "like", "% $q %");
-            
+        $lieux = Lieu::Where("name", "like", "% $q %")
+            ->orWhere("description", "like", "% $q %")
+            ->paginate(5);
+        return view('lieux.search', compact('lieux'));
+
     }
 }
