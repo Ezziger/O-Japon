@@ -149,4 +149,12 @@ class LieuController extends Controller
         return redirect()->route('lieux.index')
                          ->with('success', 'Le lieu a bien été supprimé !');
     }
+
+    public function search() {
+        $q = request()->input('q');
+
+        Lieu::Where("name", "like", "% $q %")
+            ->orWhere("description", "like", "% $q %");
+            
+    }
 }

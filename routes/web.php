@@ -37,5 +37,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::patch('commentaires/{id}', [CommentaireController::class, 'update'])->name('commentaire.update');
     Route::delete('commentaires/{id}', [CommentaireController::class, 'destroy'])->name('commentaires.destroy');
 
+    Route::get('search', [LieuController::class, 'search'])->name('lieux.search');
+
 });
 
