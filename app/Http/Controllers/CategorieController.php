@@ -37,7 +37,7 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         $newCategorie = new Categorie;
-        $newCategorie->nom = $request->nom;
+        $newCategorie->type = $request->type;
         $newCategorie->save();
 
         return back()->with('success', 'Votre nouvelle catégorie a bien été ajoutée !');
@@ -76,7 +76,7 @@ class CategorieController extends Controller
     public function update(Request $request, $id)
     {
         $majCategorie = $request->validate([
-            'nom' => 'required'
+            'type' => 'required'
         ]);
 
         $majCategorie = $request->except('_token', '_method');

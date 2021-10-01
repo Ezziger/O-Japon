@@ -37,7 +37,7 @@ class RegionController extends Controller
     public function store(Request $request)
     {
         $newRegion = new Region;
-        $newRegion->nom = $request->nom;
+        $newRegion->nom_region = $request->nom_region;
         $newRegion->save();
 
         return back()->with('success', 'La nouvelle région a bien été ajoutée !');

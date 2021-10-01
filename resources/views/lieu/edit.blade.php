@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row">
-        <form action="{{ route('lieux.update', $lieu->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('lieu.update', $lieu->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
@@ -33,7 +33,7 @@
                 <label for="region_id" class="form-label">Region du Japon dans laquelle se trouve le lieu</label>
                 <select class="form-control" name="region_id" id="region_id" required>
                     @foreach ($regions as $region)
-                    <option value="{{ $region->id }}">{{ $region->nom }}</option>
+                    <option value="{{ $region->id }}">{{ $region->nom_region }}</option>
                     @endforeach
                 </select>
             </div>
@@ -41,7 +41,7 @@
                 <label for="categorie_id" class="form-label">Quelle est la catégorie de votre lieu</label>
                 <select class="form-control" name="categorie_id" id="categorie_id" required>
                     @foreach ($categories as $categorie)
-                    <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
+                    <option value="{{ $categorie->id }}">{{ $categorie->type }}</option>
                     @endforeach
                 </select>
             </div>

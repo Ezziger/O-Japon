@@ -12,8 +12,8 @@
         <form action="{{ route('regions.store') }}" method="post">
             @csrf
         <div class="col mb-3">
-          <label for="nom" class="form-label">Nom de la région</label>
-          <input type="text" class="form-control" id="nom" name="nom">
+          <label for="nom_region" class="form-label">Nom de la région</label>
+          <input type="text" class="form-control" id="nom_region" name="nom_region">
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>

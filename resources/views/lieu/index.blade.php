@@ -59,15 +59,15 @@
                 </ul>
                 <ul class="button_location">
                     <li>
-                        <a href="{{ route('lieux.show', $lieu->id) }}" class="btn btn-outline-dark btn-sm">View Post</a>
+                        <a href="{{ route('lieu.show', $lieu) }}" class="btn btn-outline-dark btn-sm">View Post</a>
                     </li>
                     <li>
                         @can('update', $lieu)
-                        <a href="{{route('lieux.edit', $lieu->id)}}" class="btn btn-outline-dark btn-sm">Editer</a>
+                        <a href="{{route('lieu.edit', $lieu)}}" class="btn btn-outline-dark btn-sm">Editer</a>
                         @endcan
                     </li>
                     <li>@can('delete', $lieu)
-                        <form action="{{ route('lieux.destroy', $lieu->id) }}" method="POST">
+                        <form action="{{ route('lieu.destroy', $lieu) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-outline-dark btn-sm" type="submit">Supprimer</button>

@@ -47,7 +47,7 @@ class ClientAuthController extends Controller
             'nom' => 'required',
             'prenom' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|max:15|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$/',
+            'password' => 'required|confirmed|string|min:8|max:15|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$/',
         ]);
 
         $data = $request->all();

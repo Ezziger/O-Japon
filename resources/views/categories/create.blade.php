@@ -12,8 +12,8 @@
         <form action="{{ route('categories.store') }}" method="post">
             @csrf
         <div class="col mb-3">
-          <label for="nom" class="form-label">Nom de la catégorie</label>
-          <input type="text" class="form-control" id="nom" name="nom">
+          <label for="type" class="form-label">Nom de la catégorie</label>
+          <input type="text" class="form-control" id="type" name="type">
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>

@@ -13,8 +13,8 @@
             @csrf
             @method('PATCH')
         <div class="col mb-3">
-          <label for="nom" class="form-label">Nom de la région</label>
-          <input type="text" class="form-control" id="nom" name="nom" value="{{ $region->nom }}">
+          <label for="nom_region" class="form-label">Nom de la région</label>
+          <input type="text" class="form-control" id="nom_region" name="nom_region" value="{{ $region->nom_region }}">
         </div>
         <button type="submit" class="btn btn-primary">Modifier</button>
         </form>

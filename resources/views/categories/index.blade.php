@@ -5,7 +5,7 @@
     <div class="row">
         @foreach($categories as $categorie)
             <div class="card-body">
-                <h5 class="card-title">{{ $categorie->nom }}</h5>
+                <h5 class="card-title">{{ $categorie->type }}</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('categories.edit', $categorie->id) }}" method="GET">

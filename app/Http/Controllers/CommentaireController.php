@@ -20,10 +20,6 @@ class CommentaireController extends Controller
         return back();
     }
 
-    public function edit() {
-
-    }
-
     public function destroy(Commentaire $commentaire, $id) {
         $commentaire = Commentaire::findOrFail($id);
         $commentaire->delete();

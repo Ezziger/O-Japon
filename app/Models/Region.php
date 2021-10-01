@@ -16,7 +16,7 @@ class Region extends Model
      */
     
     protected $fillable = [
-        'nom'
+        'nom_region'
     ];
 
     public function lieu() {

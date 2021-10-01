@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="{{route('lieux.index')}}">O Japon</a>
+            <a class="navbar-brand" href="{{route('lieu.index')}}">O Japon</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,7 +31,7 @@
                 @else
                     <li class="nav-item">Bonjour {{Auth::user()->prenom}}</li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('lieux.create')}}">Partager une destination</a>
+                        <a class="nav-link" href="{{route('lieu.create')}}">Partager une destination</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Se déconnecter</a>
@@ -39,7 +39,7 @@
                     @endguest
                 </ul>
             </div>
-            <form class="d-flex" action="{{ route('lieux.search') }}">
+            <form class="d-flex" action="{{ route('lieu.search') }}">
                 <div class="form-group">
                     <input class="form-control" name="q" type="search" placeholder="Rechercher">
                 </div>

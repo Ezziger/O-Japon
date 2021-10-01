@@ -5,7 +5,7 @@
     <div class="row">
         @foreach($regions as $region)
             <div class="card-body">
-                <h5 class="card-title">{{ $region->nom }}</h5>
+                <h5 class="card-title">{{ $region->nom_region }}</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('regions.edit', $region->id) }}" method="GET">

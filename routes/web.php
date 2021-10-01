@@ -25,7 +25,7 @@ Route::get('registration', [ClientAuthController::class, 'registration'])->name(
 Route::post('client-registration', [ClientAuthController::class, 'clientRegistration'])->name('register.client'); 
 Route::get('signout', [ClientAuthController::class, 'signOut'])->name('signout');
 
-Route::resource('lieux', LieuController::class);
+Route::resource('lieu', LieuController::class);
 
 Route::group(['middleware' => 'auth'], function() {
     
@@ -34,10 +34,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('regions', RegionController::class);
     
     Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
-    Route::patch('commentaires/{id}', [CommentaireController::class, 'update'])->name('commentaire.update');
+    Route::patch('commentaires/{id}', [CommentaireController::class, 'update'])->name('commentaires.update');
     Route::delete('commentaires/{id}', [CommentaireController::class, 'destroy'])->name('commentaires.destroy');
 
-    Route::get('search', [LieuController::class, 'search'])->name('lieux.search');
+    Route::get('search', [LieuController::class, 'search'])->name('lieu.search');
 
 });
 

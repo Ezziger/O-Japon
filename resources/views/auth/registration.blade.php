@@ -44,6 +44,14 @@
                             </div>
 
                             <div class="form-group mb-3">
+                                <input type="password" placeholder="Confirmation du password" id="password_confirmation" class="form-control"
+                                    name="password_confirmation" required>
+                                @if ($errors->has('password_confirmation'))
+                                <span class="text-danger">{{ 'Vos mots de passe ne sont pas identiques !'}}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group mb-3">
                                 <div class="checkbox">
                                     <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
                                 </div>

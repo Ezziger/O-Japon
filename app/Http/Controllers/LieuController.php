@@ -26,10 +26,10 @@ class LieuController extends Controller
         $lieux = Lieu::join('categories', 'lieus.categorie_id', '=', 'categories.id')
                      ->join('regions', 'lieus.region_id', '=', 'regions.id')
                      ->join('users', 'lieus.user_id', '=', 'users.id')
-                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.alt_image','lieus.description', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.nom as cat', 'regions.nom as reg', 'users.id as u', 'users.role_id as role_id')
+                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.alt_image','lieus.description', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.type as cat', 'regions.nom_region as reg', 'users.id as u', 'users.role_id as role_id')
                      ->withCount('commentaires_reponses')
                      ->get();
-        return view('lieux.index', compact('lieux'));
+        return view('lieu.index', compact('lieux'));
     }
 
     /**
@@ -41,7 +41,7 @@ class LieuController extends Controller
     {
         $regions = Region::all();
         $categories = Categorie::all();
-        return view('lieux.create', compact('regions', 'categories'));
+        return view('lieu.create', compact('regions', 'categories'));
     }
 
     /**
@@ -78,11 +78,10 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lieu $lieu)
     {
-        $lieu = Lieu::findOrFail($id);
         $commentaires = Commentaire::all();
-        return view('lieux.show', compact('lieu', 'commentaires'));
+        return view('lieu.show', compact('lieu', 'commentaires'));
     }
 
     /**
@@ -91,13 +90,12 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) 
+    public function edit(Lieu $lieu) 
     {
-        $lieu = Lieu::findOrFail($id);
         $regions = Region::all();
         $categories = Categorie::all();
         $this->authorize('update', $lieu);
-        return view('lieux.edit', compact('lieu', 'regions', 'categories'));
+        return view('lieu.edit', compact('lieu', 'regions', 'categories'));
     }
 
     /**
@@ -107,9 +105,8 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, Lieu $lieu)
+    public function update(Request $request, Lieu $lieu)
     {
-        $lieu = Lieu::findOrFail($id);
         $this->authorize('update', $lieu);
         $majLieu = $request->validate([
             'image' => 'required',
@@ -129,8 +126,8 @@ class LieuController extends Controller
             $majLieu['image'] = "/images/" . $imageName;
         }
         
-        Lieu::whereId($id)->update($majLieu);
-        return redirect()->route('lieux.index')
+        $lieu->update($majLieu);
+        return redirect()->route('lieu.index')
                          ->with('success', 'Votre lieu a été modifié avec succès !');
     }
 
@@ -141,22 +138,28 @@ class LieuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Lieu $lieu)
+    public function destroy(Lieu $lieu)
     {
-        $lieu = Lieu::findOrFail($id);
         $this->authorize('delete', $lieu);
         $lieu->delete();
-        return redirect()->route('lieux.index')
+        return redirect()->route('lieu.index')
                          ->with('success', 'Le lieu a bien été supprimé !');
     }
 
     public function search() {
         $q = request()->input('q');
 
-        $lieux = Lieu::Where("name", "like", "% $q %")
-            ->orWhere("description", "like", "% $q %")
-            ->paginate(5);
-        return view('lieux.search', compact('lieux'));
-
+        $lieux = Lieu::with('categorie', 'region')
+                     ->join('categories', 'lieus.categorie_id', '=', 'categories.id')
+                     ->join('regions', 'lieus.region_id', '=', 'regions.id')
+                     ->where("nom", "like", "%$q%")
+                     ->orWhere("description", "like", "%$q%")
+                     ->orWhere("categories.type", "like", "%$q%")
+                     ->orWhere("regions.nom_region", "like", "%$q%")
+                     ->select('lieus.*')
+                     ->paginate(5);
+        return view('lieu.search', compact('lieux'));
     }
+
+    
 }
