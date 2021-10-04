@@ -43,11 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function lieu() {
+    public function lieux() {
         return $this->hasMany(Lieu::class);
     }
 
-    public function commentaire() {
+    public function commentaires() {
         return $this->hasMany(Commentaire::class);
     }
 

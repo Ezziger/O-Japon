@@ -36,6 +36,10 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
+        $newCategorie = $request->validate([
+            'type' => 'required|string|min:3|max:20',
+        ]);
+
         $newCategorie = new Categorie;
         $newCategorie->type = $request->type;
         $newCategorie->save();
@@ -44,25 +48,13 @@ class CategorieController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Categorie $categorie)
     {
-        $categorie = Categorie::findOrFail($id);
         return view('categories.edit', compact('categorie'));
     }
 
@@ -73,15 +65,15 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Categorie $categorie)
     {
         $majCategorie = $request->validate([
-            'type' => 'required'
+            'type' => 'required|string|min:3|max:20'
         ]);
 
         $majCategorie = $request->except('_token', '_method');
 
-        Categorie::whereId($id)->update($majCategorie);
+        $categorie->update($majCategorie);
         return redirect()->route('categories.index')
                ->with('success', 'Votre catégorie a bien été mise à jour !');
     }
@@ -92,9 +84,8 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Categorie $categorie)
     {
-        $categorie = Categorie::findOrFail($id);
         $categorie->delete();
         return redirect()->route('categories.index')
                      ->with('success', 'Votre catégorie a bien été supprimée !');

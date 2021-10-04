@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class ClientAuthController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('guest')->only(['registration']);
+    }
+
     public function index()
     {
         return view('auth.login');

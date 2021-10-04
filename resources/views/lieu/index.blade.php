@@ -2,7 +2,14 @@
 @section('title', 'Les lieux à visiter au Japon')
 @section('content')
 
+<div class="banniere"></div>
 <div class="conteneur">
+    <div>
+        <p>Bienvenue sur O Japon</p>
+    </div>
+    <div>
+        <h2>Les dernières destinations postées</h2>
+    </div>
     @guest
     @foreach($lieux as $lieu)
     <article class="postcard light">
@@ -46,13 +53,13 @@
             </div>
             <div class="postcard_bot_body">
                 <ul class="informations">
-                    <li><i class="fas fa-map"></i>{{ $lieu->reg }}</li>
-                    @if ($lieu->cat == 'Monuments')
-                    <li><i class="fas fa-monument"></i>{{ $lieu->cat }}</li>
-                    @elseif ($lieu->cat == 'Restaurants')
-                    <li><i class="fas fa-utensils"></i>{{ $lieu->cat }}</li>
-                    @elseif ($lieu->cat == 'Divertissements')
-                    <li><i class="fas fa-theater-masks"></i>{{ $lieu->cat }}</li>
+                    <li><i class="fas fa-map"></i>{{ $lieu->region->nom_region }}</li>
+                    @if ($lieu->categorie->type == 'Monuments')
+                    <li><i class="fas fa-monument"></i>{{ $lieu->categorie->type }}</li>
+                    @elseif ($lieu->categorie->type == 'Restaurants')
+                    <li><i class="fas fa-utensils"></i>{{ $lieu->categorie->type }}</li>
+                    @elseif ($lieu->categorie->type == 'Divertissements')
+                    <li><i class="fas fa-theater-masks"></i>{{ $lieu->categorie->type }}</li>
                     @endif
                     <li>Prix : {{ $lieu->prix }} <i class="fas fa-yen-sign"></i></li>
                     <li><i class="fas fa-comment"></i>{{ $lieu->commentaires_reponses_count }}</li>
@@ -80,5 +87,8 @@
     </article>
     @endforeach
     @endguest
+    <div class="bottomNav">
+        {{ $lieux->links() }}
+    </div>
 </div>
 @endsection

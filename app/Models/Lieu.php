@@ -21,7 +21,6 @@ class Lieu extends Model
         'description',
         'prix',
         'map',
-        'password',
         'user_id',
         'categorie_id',
         'region_id'

@@ -23,11 +23,11 @@ class CreateLieusTable extends Migration
             $table->float('prix', 6, 2);
             $table->timestamps();
             $table->text('map')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->integer('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('categorie_id');
+            $table->integer('categorie_id');
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->unsignedBigInteger('region_id');
+            $table->integer('region_id');
             $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
         });
     }

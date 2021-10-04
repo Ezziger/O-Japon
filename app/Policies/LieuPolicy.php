@@ -17,17 +17,6 @@ class LieuPolicy
     }
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
@@ -72,29 +61,5 @@ class LieuPolicy
     public function delete(User $user, Lieu $lieu)
     {
         return $user->id == $lieu->user_id;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Lieu  $lieu
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Lieu $lieu)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Lieu  $lieu
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Lieu $lieu)
-    {
-        //
     }
 }

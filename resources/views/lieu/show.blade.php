@@ -13,7 +13,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-7 d-flex justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center">
             <div class="card">
                 <div class="face front ">
                     <img src="{{ $lieu->image }}" alt="Photo du {{$lieu->nom}}">
@@ -39,36 +39,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 d-flex flex-column align-items-center">
-            <h4>Display Comments</h4>
+        <div class="col-md-6 d-flex flex-column align-items-end commentaireSection">
+            <h4 class="d-flex justify-content-center w-100">Affichage des commentaires</h4>
             @include('lieu.displayComment', ['commentaires' => $lieu->commentaires, 'lieu_id' => $lieu->id])
         </div>
     </div>
+</div>
     <div class="row">
-        <div class="col">
+        <div id="comment" class="col ajoutForm">
             <!--------------- FORMULAIRE D'AJOUT D'UN COMMENTAIRE -------------->
-            <h4>Add comment</h4>
             <form id="formAdd" method="post" action="{{ route('commentaires.store') }}">
+                <h4>Ajouter votre commentaire</h4>
                 @csrf
-                <div id="comment">
-                    <div class="form-group">
-                        <textarea class="form-control" name="commentaire"></textarea>
-                        <input type="hidden" name="lieu_id" value="{{ $lieu->id }}" />
-                    </div>
-                    <div class="form-group d-flex justify-content-end mt-2">
-                        <input type="submit" class="btn btn-dark" value="Add Comment" />
-                    </div>
-            </form>
-
-            <!--------------- FORMULAIRE D'EDITION D'UN COMMENTAIRE -------------->
-            <form id="formEdit" style="display: none;" method="post" action="">
-                <div class="form-group">
-                    @csrf
-                    <input type="textarea" class="form-control" name="commentaire" value="${commentaire}">
-                    <input type="hidden" name="commentaire_id" value="${id}" />
+                <div class="form-group formWrapper">
+                    <textarea class="form-control" name="commentaire"></textarea>
+                    <input type="hidden" name="lieu_id" value="{{ $lieu->id }}" />
                 </div>
-                <div class="form-group">
-                    <input id="" type="submit" class="btn btn-success" value="Mettre à jour" />
+                <div class="form-group d-flex justify-content-end mt-2">
+                    <input type="submit" class="btn btn-dark" value="Add Comment" />
                 </div>
             </form>
         </div>

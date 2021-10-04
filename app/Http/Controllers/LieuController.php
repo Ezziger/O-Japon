@@ -6,7 +6,6 @@ use App\Models\Region;
 use App\Models\Categorie;
 use App\Models\Lieu;
 use App\Models\Commentaire;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class LieuController extends Controller
@@ -23,12 +22,12 @@ class LieuController extends Controller
      */
     public function index()
     {
-        $lieux = Lieu::join('categories', 'lieus.categorie_id', '=', 'categories.id')
+        $lieux = Lieu::with('categorie', 'region', 'user')
+                     ->join('categories', 'lieus.categorie_id', '=', 'categories.id')
                      ->join('regions', 'lieus.region_id', '=', 'regions.id')
                      ->join('users', 'lieus.user_id', '=', 'users.id')
-                     ->select('lieus.id', 'lieus.nom', 'lieus.prix', 'lieus.map', 'lieus.image', 'lieus.alt_image','lieus.description', 'lieus.user_id','lieus.created_at', 'users.prenom as name', 'categories.type as cat', 'regions.nom_region as reg', 'users.id as u', 'users.role_id as role_id')
                      ->withCount('commentaires_reponses')
-                     ->get();
+                     ->paginate(5);
         return view('lieu.index', compact('lieux'));
     }
 
@@ -52,6 +51,19 @@ class LieuController extends Controller
      */
     public function store(Request $request)
     {
+
+        $newLieu = $request->validate([
+            'image' => 'required|string|min:10|max:60',
+            'alt_image' => 'required|string|min:10|max:50',
+            'nom' => 'required|string',
+            'description' => 'required|string|min:3|max:255',
+            'prix' => 'required|integer',
+            'map' => 'nullable',
+            'user_id' => 'required',
+            'categorie_id' => 'required',
+            'region_id' => 'required'
+        ]);
+
         $imageName = "";
         if ($request->image) {
             $imageName = time() . '.' . $request->image->extension();
@@ -131,7 +143,6 @@ class LieuController extends Controller
                          ->with('success', 'Votre lieu a été modifié avec succès !');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
@@ -159,7 +170,5 @@ class LieuController extends Controller
                      ->select('lieus.*')
                      ->paginate(5);
         return view('lieu.search', compact('lieux'));
-    }
-
-    
+    } 
 }

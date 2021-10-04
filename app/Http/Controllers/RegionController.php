@@ -36,6 +36,10 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
+        $newRegion = $request->validate([
+            'nom_region' => 'required|string|min:3|max:20',
+        ]);
+
         $newRegion = new Region;
         $newRegion->nom_region = $request->nom_region;
         $newRegion->save();
@@ -44,25 +48,13 @@ class RegionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Region $region)
     {
-        $region = Region::findOrFail($id);
         return view('regions.edit', compact('region'));
     }
 
@@ -73,15 +65,15 @@ class RegionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Region $region)
     {
          $majRegion = $request->validate([
-             'nom' => 'required'
+             'nom_region' => 'required|string|min:3|max:20'
         ]);
 
         $majRegion = $request->except('_token', '_method');
 
-        Region::whereId($id)->update($majRegion);
+        $region->update($majRegion);
         return redirect()->route('regions.index')
                          ->with('success', 'La region a bien été mise à jour !');
     }
@@ -92,9 +84,8 @@ class RegionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Region $region)
     {
-        $region = Region::findOrfail($id);
         $region->delete();
         return redirect()->route('regions.index')
                          ->with('success', 'La région a été supprimée avec succès');

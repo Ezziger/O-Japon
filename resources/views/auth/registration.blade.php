@@ -50,13 +50,6 @@
                                 <span class="text-danger">{{ 'Vos mots de passe ne sont pas identiques !'}}</span>
                                 @endif
                             </div>
-
-                            <div class="form-group mb-3">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
-                                </div>
-                            </div>
-
                             <div class="d-grid mx-auto">
                                 <button type="submit" class="btn btn-dark btn-block">S'enregister</button>
                             </div>

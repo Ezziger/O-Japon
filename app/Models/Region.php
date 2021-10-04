@@ -19,7 +19,7 @@ class Region extends Model
         'nom_region'
     ];
 
-    public function lieu() {
+    public function lieux() {
         return $this->belongsToMany(Lieu::class);
     }
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\CommentaireController;
 
 Route::get('dashboard', [ClientAuthController::class, 'dashboard']); 
 Route::get('login', [ClientAuthController::class, 'index'])->name('login');
+Route::get('/', [ClientAuthController::class, 'index'])->name('login');
 Route::post('client-login', [ClientAuthController::class, 'clientLogin'])->name('login.client'); 
 Route::get('registration', [ClientAuthController::class, 'registration'])->name('register-user');
 Route::post('client-registration', [ClientAuthController::class, 'clientRegistration'])->name('register.client'); 
@@ -29,9 +30,9 @@ Route::resource('lieu', LieuController::class);
 
 Route::group(['middleware' => 'auth'], function() {
     
-    Route::resource('categories', CategorieController::class);
+    Route::resource('categories', CategorieController::class)->except('show');
     
-    Route::resource('regions', RegionController::class);
+    Route::resource('regions', RegionController::class)->except('show');
     
     Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
     Route::patch('commentaires/{id}', [CommentaireController::class, 'update'])->name('commentaires.update');

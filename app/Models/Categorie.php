@@ -19,7 +19,7 @@ class Categorie extends Model
         'type'
     ];
 
-    public function lieu() {
+    public function lieux() {
         return $this->belongsToMany(Lieu::class);
     }
 }

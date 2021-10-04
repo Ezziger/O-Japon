@@ -13,15 +13,18 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav id="topNav "class="navbar navbar-expand-lg navbar-light">
         <div class="container">
+            @auth
+                <p class="welcome">Bienvenue</p>
+            @endauth
             <a class="navbar-brand" href="{{route('lieu.index')}}">O Japon</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end" style="width: 100%;">
                 @guest
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end" style="width: 100%;">
                     <li class="nav-item show">
                         <a class="nav-link" href="{{ route('login') }}">Se connecter</a>
                     </li>
@@ -29,19 +32,25 @@
                         <a class="nav-link" href="{{ route('register-user') }}">S'enregistrer</a>
                     </li>
                 @else
-                    <li class="nav-item">Bonjour {{Auth::user()->prenom}}</li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('lieu.create')}}">Partager une destination</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('signout') }}">Se déconnecter</a>
-                    </li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center" style="width: 100%;">
+                    <li class="nav-item navPrenom">{{Auth::user()->prenom}}</li>
+                    <div class="d-flex justify-content-end w-100">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('lieu.create')}}">Partager une destination</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('signout') }}">Se déconnecter</a>
+                        </li>
+                    </div>
                     @endguest
                 </ul>
             </div>
             <form class="d-flex" action="{{ route('lieu.search') }}">
                 <div class="form-group">
-                    <input class="form-control" name="q" type="search" placeholder="Rechercher">
+                    <input id="search" class="form-control" name="q" type="search" placeholder="Rechercher">
                 </div>
                 <button class="btn btn-outline pe-1" type="submit"><i class="fas fa-search"></i></button>
             </form>

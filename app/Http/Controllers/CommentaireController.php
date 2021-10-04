@@ -8,6 +8,8 @@ use App\Models\Commentaire;
 
 class CommentaireController extends Controller
 {
+    /********** STOCKE UN COMMENTAIRE EN BASE DE DONNEES **********/
+
     public function store(Request $req) {
         $req->validate([
             'commentaire' => 'required',
@@ -17,16 +19,28 @@ class CommentaireController extends Controller
         $input['user_id'] = auth()->user()->id;
 
         Commentaire::create($input);
-        return back();
+        return back()->with('success', 'Votre commentaire a été posté avec succès !');
     }
 
-    public function destroy(Commentaire $commentaire, $id) {
-        $commentaire = Commentaire::findOrFail($id);
+        /********** MET A JOUR UN COMMENTAIRE EN BASE DE DONNEES **********/
+
+    public function update(Request $request, Commentaire $commentaire) {
+
+        $majCommentaire = $request->validate([
+            'commentaire' => 'required',
+        ]);
+
+        $majCommentaire = $request->except('_token', '_method');
+
+        $commentaire->update($majCommentaire);
+        return redirect()->route('lieu.show')
+                         ->with('success', 'Votre commentaire a été modifié avec succès !');
+    }
+
+            /********** SUPPRIME UN COMMENTAIRE EN BASE DE DONNEES **********/
+
+    public function destroy(Commentaire $commentaire) {
         $commentaire->delete();
         return back()->with('success', 'Votre commentaire a bien été supprimée');
-    }
-
-    public function editing() {
-        return false;
     }
 }
