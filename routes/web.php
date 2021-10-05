@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CommentaireController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('categories', CategorieController::class)->except('show');
     
     Route::resource('regions', RegionController::class)->except('show');
+
+    Route::resource('user', UserController::class)->except('index, create, store');
+    Route::patch('/user/{id}/updatePassword', [UserController::class, 'update_password'])->name('user.updatePassword');
     
     Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
     Route::patch('commentaires/{id}', [CommentaireController::class, 'update'])->name('commentaires.update');

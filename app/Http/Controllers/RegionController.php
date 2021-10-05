@@ -44,7 +44,7 @@ class RegionController extends Controller
         $newRegion->nom_region = $request->nom_region;
         $newRegion->save();
 
-        return back()->with('success', 'La nouvelle région a bien été ajoutée !');
+        return redirect()->route('regions.create')->with('success', 'La nouvelle région a bien été ajoutée !');
     }
 
     /**

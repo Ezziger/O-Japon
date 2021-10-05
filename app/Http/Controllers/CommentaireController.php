@@ -19,7 +19,8 @@ class CommentaireController extends Controller
         $input['user_id'] = auth()->user()->id;
 
         Commentaire::create($input);
-        return back()->with('success', 'Votre commentaire a été posté avec succès !');
+        return redirect()->route('lieu.show')
+                         ->with('success', 'Votre commentaire a été posté avec succès !');
     }
 
         /********** MET A JOUR UN COMMENTAIRE EN BASE DE DONNEES **********/
@@ -41,6 +42,7 @@ class CommentaireController extends Controller
 
     public function destroy(Commentaire $commentaire) {
         $commentaire->delete();
-        return back()->with('success', 'Votre commentaire a bien été supprimée');
+        return redirect()->route('lieu.show')
+                         ->with('success', 'Votre commentaire a bien été supprimée');
     }
 }

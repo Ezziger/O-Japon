@@ -44,7 +44,8 @@ class CategorieController extends Controller
         $newCategorie->type = $request->type;
         $newCategorie->save();
 
-        return back()->with('success', 'Votre nouvelle catégorie a bien été ajoutée !');
+        return redirect()->route('categorie.create')
+                         ->with('success', 'Votre nouvelle catégorie a bien été ajoutée !');
     }
 
     /**

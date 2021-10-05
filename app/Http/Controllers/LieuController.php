@@ -81,7 +81,8 @@ class LieuController extends Controller
         $newLieu->categorie_id = $request->categorie_id;
         $newLieu->region_id = $request->region_id;
         $newLieu->save();
-        return back()->with('success', 'Votre lieu a été sauvegardée avec succès !' );
+        return redirect()->route('lieu.create')
+                         ->with('success', 'Votre lieu a été sauvegardée avec succès !' );
     }
 
     /**

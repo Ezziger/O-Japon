@@ -39,7 +39,7 @@
                             <a class="nav-link" href="{{route('lieu.create')}}">Partager une destination</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Profil</a>
+                            <a class="nav-link" href="{{ route('user.show', auth()->user()->id) }}">Profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('signout') }}">Se déconnecter</a>
