@@ -19,8 +19,7 @@ class CommentaireController extends Controller
         $input['user_id'] = auth()->user()->id;
 
         Commentaire::create($input);
-        return redirect()->route('lieu.show')
-                         ->with('success', 'Votre commentaire a été posté avec succès !');
+        return back()->with('success', 'Votre commentaire a été posté avec succès !');
     }
 
         /********** MET A JOUR UN COMMENTAIRE EN BASE DE DONNEES **********/
@@ -34,15 +33,13 @@ class CommentaireController extends Controller
         $majCommentaire = $request->except('_token', '_method');
 
         $commentaire->update($majCommentaire);
-        return redirect()->route('lieu.show')
-                         ->with('success', 'Votre commentaire a été modifié avec succès !');
+        return back()->with('success', 'Votre commentaire a été modifié avec succès !');
     }
 
             /********** SUPPRIME UN COMMENTAIRE EN BASE DE DONNEES **********/
 
     public function destroy(Commentaire $commentaire) {
         $commentaire->delete();
-        return redirect()->route('lieu.show')
-                         ->with('success', 'Votre commentaire a bien été supprimée');
+        return back()->with('success', 'Votre commentaire a bien été supprimée');
     }
 }

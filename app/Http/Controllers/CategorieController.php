@@ -44,7 +44,7 @@ class CategorieController extends Controller
         $newCategorie->type = $request->type;
         $newCategorie->save();
 
-        return redirect()->route('categorie.create')
+        return redirect()->route('categories.index')
                          ->with('success', 'Votre nouvelle catégorie a bien été ajoutée !');
     }
 
@@ -54,9 +54,9 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit(Categorie $category)
     {
-        return view('categories.edit', compact('categorie'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -66,7 +66,7 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, Categorie $category)
     {
         $majCategorie = $request->validate([
             'type' => 'required|string|min:3|max:20'
@@ -74,7 +74,7 @@ class CategorieController extends Controller
 
         $majCategorie = $request->except('_token', '_method');
 
-        $categorie->update($majCategorie);
+        $category->update($majCategorie);
         return redirect()->route('categories.index')
                ->with('success', 'Votre catégorie a bien été mise à jour !');
     }
@@ -85,10 +85,10 @@ class CategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Categorie $category)
     {
-        $categorie->delete();
+        $category->delete();
         return redirect()->route('categories.index')
-                     ->with('success', 'Votre catégorie a bien été supprimée !');
+                         ->with('success', 'Votre catégorie a bien été supprimée !');
     }
 }

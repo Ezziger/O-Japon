@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Lieu;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -19,8 +20,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('commentaires');
-        return view('user.show', compact('user'));
+        $lieux = Lieu::where('user_id', $user->id)
+                                    ->latest()
+                                    ->paginate(2);
+        return view('user.show', compact('user', 'lieux'));
     }
 
     /**

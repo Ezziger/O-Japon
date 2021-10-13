@@ -52,14 +52,12 @@ class LieuController extends Controller
     public function store(Request $request)
     {
 
-        $newLieu = $request->validate([
-            'image' => 'required|string|min:10|max:60',
-            'alt_image' => 'required|string|min:10|max:50',
-            'nom' => 'required|string',
-            'description' => 'required|string|min:3|max:255',
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'alt_image' => 'required|string|min:5|max:50',
+            'nom' => 'required|string|min:5|max:50',
+            'description' => 'required|min:3|max:500',
             'prix' => 'required|integer',
-            'map' => 'nullable',
-            'user_id' => 'required',
             'categorie_id' => 'required',
             'region_id' => 'required'
         ]);
@@ -81,7 +79,7 @@ class LieuController extends Controller
         $newLieu->categorie_id = $request->categorie_id;
         $newLieu->region_id = $request->region_id;
         $newLieu->save();
-        return redirect()->route('lieu.create')
+        return redirect()->route('lieu.index')
                          ->with('success', 'Votre lieu a été sauvegardée avec succès !' );
     }
 
@@ -122,13 +120,13 @@ class LieuController extends Controller
     {
         $this->authorize('update', $lieu);
         $majLieu = $request->validate([
-            'image' => 'required',
-            'alt_image' => 'required',
-            'nom' => 'required',
-            'prix' => 'required',
-            'map' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'alt_image' => 'required|string|min:5|max:50',
+            'nom' => 'required|string|min:5|max:50',
+            'description' => 'required|min:3|max:500',
+            'prix' => 'required|integer',
             'categorie_id' => 'required',
-            'region_id' => 'required',
+            'region_id' => 'required'
         ]);
         
         $majLieu = $request->except('_token', '_method');

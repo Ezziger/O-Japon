@@ -37,11 +37,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('user', UserController::class)->except('index, create, store');
     Route::patch('/user/{id}/updatePassword', [UserController::class, 'update_password'])->name('user.updatePassword');
-    
-    Route::post('commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
-    Route::patch('commentaires/{id}', [CommentaireController::class, 'update'])->name('commentaires.update');
-    Route::delete('commentaires/{id}', [CommentaireController::class, 'destroy'])->name('commentaires.destroy');
 
+    Route::resource('commentaires', CommentaireController::class);
+    
     Route::get('search', [LieuController::class, 'search'])->name('lieu.search');
 
 });

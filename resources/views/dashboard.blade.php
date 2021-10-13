@@ -13,12 +13,24 @@
 </head>
 
 <body>
-    <nav id="topNav "class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+    <nav id="topNav " class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <div>
+                <form class="d-flex" action="{{ route('lieu.search') }}">
+                    <div class="form-group">
+                        <input id="search" class="form-control" name="q" type="search" placeholder="Rechercher">
+                    </div>
+                    <button class="btn btn-outline pe-1" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
             @auth
-                <p class="welcome">Bienvenue</p>
+            <p class="welcome">Bienvenue
+                @endauth
+                <a class="navbar-brand" href="{{route('lieu.index')}}">O Japon</a>
+                @auth
+                {{Auth::user()->prenom}}
+            </p>
             @endauth
-            <a class="navbar-brand" href="{{route('lieu.index')}}">O Japon</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,9 +43,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register-user') }}">S'enregistrer</a>
                     </li>
+                </ul>
                 @else
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center" style="width: 100%;">
-                    <li class="nav-item navPrenom">{{Auth::user()->prenom}}</li>
                     <div class="d-flex justify-content-end w-100">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('lieu.create')}}">Partager une destination</a>
@@ -45,23 +57,17 @@
                             <a class="nav-link" href="{{ route('signout') }}">Se déconnecter</a>
                         </li>
                     </div>
-                    @endguest
                 </ul>
+                @endguest
             </div>
-            <form class="d-flex" action="{{ route('lieu.search') }}">
-                <div class="form-group">
-                    <input id="search" class="form-control" name="q" type="search" placeholder="Rechercher">
-                </div>
-                <button class="btn btn-outline pe-1" type="submit"><i class="fas fa-search"></i></button>
-            </form>
         </div>
     </nav>
-    @if(session()->get('success'))
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
-    </div><br />
-    @endif
     @yield('content')
+    <footer>
+        <div class="footer">
+            <p>Copyright © 2021 | Geay Steven | Tous droits réservés</p>
+        </div>
+    </footer>
 </body>
 
 </html>

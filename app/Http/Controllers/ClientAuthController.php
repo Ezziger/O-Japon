@@ -30,11 +30,11 @@ class ClientAuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                        ->withSuccess('Signed in');
+            return redirect()->intended('lieu')
+                        ->withSuccess('Vous êtes connecté(e).');
         }
 
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect("login")->withErrors(['Vos informations ne sont pas valides']);
     }
 
 

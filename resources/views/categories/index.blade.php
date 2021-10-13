@@ -1,24 +1,27 @@
 @extends('dashboard')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        @foreach($categories as $categorie)
+
+<main>
+    <h2>Ajouter une catégorie</h2>
+    <div class="container d-flex justify-content-center flex-wrap">
+        @foreach($categories as $category)
+        <div class="card cardHeigth" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{ $categorie->type }}</h5>
+                <h5 class="card-title text-center">{{ $category->type }}</h5>
+                <div class="d-flex justify-content-center">
+                    <form action="{{ route('categories.edit', $category) }}" method="GET">
+                        <button class="btn btn-outline-dark btn-sm m-1" type="submit">Editer</button>
+                    </form>
+                    <form action="{{ route('categories.destroy', $category) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-outline-dark btn-sm m-1" type="submit">Supprimer</button>
+                    </form>
+                </div>
             </div>
-            <div class="card-body">
-                <form action="{{ route('categories.edit', $categorie->id) }}" method="GET">
-                    <button class="btn btn-primary btn-sm" type="submit">Editer</button>
-                </form>
-                <form action="{{ route('categories.destroy', $categorie->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-primary btn-sm" type="submit">Supprimer</button>
-                </form>
-            </div>
-            @endforeach
         </div>
+        @endforeach
     </div>
-</div>
+</main>
 @endsection
