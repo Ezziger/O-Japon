@@ -7,6 +7,8 @@ use App\Http\Controllers\LieuController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('commentaires', CommentaireController::class);
     
     Route::get('search', [LieuController::class, 'search'])->name('lieu.search');
+
+    Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
 
 });
 

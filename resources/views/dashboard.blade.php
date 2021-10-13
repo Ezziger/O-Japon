@@ -47,6 +47,11 @@
                 @else
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center" style="width: 100%;">
                     <div class="d-flex justify-content-end w-100">
+                @if (Auth::user()->role_id == 2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.index')}}">Administration</a>
+                        </li>
+                @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('lieu.create')}}">Partager une destination</a>
                         </li>
