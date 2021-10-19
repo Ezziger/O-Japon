@@ -134,6 +134,8 @@
                 }
                 
                 h2 {
+                    font-family: 'Kaushan Script', cursive;
+                    font-size: 40px;
                     text-align: center;
                     margin-bottom: 50px;
                 }
@@ -228,6 +230,13 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                }
+                
+                .favorites button {
+                    border: none;
+                    font-size: 25px;
+                    background-color: transparent;
+                    color: #FF6961;
                 }
                 
                 .postcard_creation {
@@ -435,6 +444,63 @@
                 
                 .EditFormPosition {
                     position: relative;
+                }
+                /***** ADMIN BOARD *****/
+                
+                .adminBoardMiddle {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                }
+                
+                .adminBoard {
+                    width: auto;
+                    height: initial;
+                    border: 1px solid;
+                    border-radius: 15px;
+                    padding: 20px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    color: inherit;
+                }
+                
+                .adminBoard:hover {
+                    color: #000000;
+                    transform: scale(1.1);
+                }
+                
+                .pink {
+                    border-color: rgba(250, 220, 230, 1);
+                    background-color: rgba(250, 220, 230, 1);
+                }
+                
+                .yellow {
+                    border-color: #F5FADC;
+                    background-color: #F5FADC;
+                }
+                
+                .green {
+                    border-color: #DCFAF0;
+                    background-color: #DCFAF0;
+                }
+                
+                .purple {
+                    border-color: #E1DCFA;
+                    background-color: #E1DCFA;
+                }
+                
+                .blue {
+                    border-color: #DCE9FA;
+                    background-color: #DCE9FA;
+                }
+                
+                .backgroundAdmin {
+                    height: 70vh;
+                    width: 90vw;
+                    background-image: url(/images/Jardin_Japonais.jpg);
+                    background-repeat: no-repeat;
+                    background-size: cover;
                 }
                 /***** MEDIA QUERIES ACCUEIL *****/
                 

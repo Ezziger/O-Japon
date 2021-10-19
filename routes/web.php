@@ -8,7 +8,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\FavoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function() {
     
     Route::resource('regions', RegionController::class)->except('show');
 
-    Route::resource('user', UserController::class)->except('index, create, store');
+    Route::resource('user', UserController::class)->except('create, store');
     Route::patch('/user/{id}/updatePassword', [UserController::class, 'update_password'])->name('user.updatePassword');
 
     Route::resource('commentaires', CommentaireController::class);
@@ -45,6 +45,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('search', [LieuController::class, 'search'])->name('lieu.search');
 
     Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('admin/lieux', [AdminController::class, 'getLieux'])->name('admin.lieux');
+    Route::get('admin/commentaires', [AdminController::class, 'getCommentaires'])->name('admin.commentaires');
+
+    Route::resource('favoris', FavoriController::class)->except('show, update, edit, create');
 
 });
 

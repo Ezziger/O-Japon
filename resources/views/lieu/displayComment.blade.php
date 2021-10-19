@@ -17,14 +17,14 @@
         <div class="row commentContent">
             <div class="col middlePart">
                 <p id="commentaire">{{ $commentaire->commentaire }}</p>
-                <button class="commentEdit" type="button"><a id="{{ $commentaire->id }}" onclick='editing("{{ $commentaire->id }}")'><i class="far fa-edit"></i></a> </button>
+                <button class="commentEdit" type="button" data-toggle="tooltip" data-placement="bottom" title="Modifier votre commentaire"><a id="{{ $commentaire->id }}" onclick='editing("{{ $commentaire->id }}")'><i class="far fa-edit"></i></a> </button>
                 <!-- Bouton de suppression du commentaire -->
 
                 @can('delete', $commentaire)
                 <form method="POST" action="{{ route('commentaires.destroy', $commentaire) }}">
                     @csrf
                     @method('DELETE')
-                    <button class="commentDelete" type="submit"><i class="far fa-times-circle"></i></button>
+                    <button class="commentDelete" type="submit" data-toggle="tooltip" data-placement="bottom" title="Supprimer votre commentaire"><i class="far fa-times-circle"></i></button>
                 </form>
                 @endcan
             </div>

@@ -59,4 +59,14 @@ class User extends Authenticatable
         return $this->role->nom == 'administrateur';
     }
 
+    /***** FAVORIS *****/
+
+    public function favoris () {
+        return $this->belongsToMany(Lieu::class, 'favoris');
+    }
+
+    public function isInFavorites (Lieu $lieu) {
+        return $lieu->users()->where('user_id', $this->id)->exists();
+    }
+
 }

@@ -41,9 +41,15 @@ class Lieu extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+    /***** FAVORIS *****/
+    
+    public function users () {
+        return $this->belongsToMany(User::class, 'favoris');
+    }
 
 /* A faire vérifier (comptage des commentaires + reponses) */
     public function commentaires_reponses() {
         return $this->hasMany(Commentaire::class); 
     }
+
 }
