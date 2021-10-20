@@ -17,7 +17,9 @@
         <div class="row commentContent">
             <div class="col middlePart">
                 <p id="commentaire">{{ $commentaire->commentaire }}</p>
+                @can('update', $commentaire)
                 <button class="commentEdit" type="button" data-toggle="tooltip" data-placement="bottom" title="Modifier votre commentaire"><a id="{{ $commentaire->id }}" onclick='editing("{{ $commentaire->id }}")'><i class="far fa-edit"></i></a> </button>
+                @endcan
                 <!-- Bouton de suppression du commentaire -->
 
                 @can('delete', $commentaire)
