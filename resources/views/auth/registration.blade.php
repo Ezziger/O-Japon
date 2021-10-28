@@ -1,12 +1,12 @@
-@extends('dashboard')
+@extends('layouts.app')
 
 @section('content')
-<main class="signup-form">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-4 p-4 signInWrapper">
+<main class="signup-form m-0">
+    <div class="container-fluid background backgroundRegistration">
+        <div class="row centrage">
+        <div class="col-md-6 col-xl-4 p-4 signInWrapper gif mb-5">
                 <div class="card-body">
-                    <h3 class="text-center">Enregistrement de l'utilisateur</h3>
+                    <h2 class="text-center">Enregistrement de l'utilisateur</h2>
                     <form action="{{ route('register.client') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
@@ -40,7 +40,7 @@
                             @endif
                         </div>
                         <div class="d-grid mx-auto">
-                            <button type="submit" class="btn">S'enregistrer</button>
+                            <button type="submit" class="btn btn-light btn-sm mt-4">S'enregistrer</button>
                         </div>
                     </form>
                 </div>

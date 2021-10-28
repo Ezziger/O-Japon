@@ -1,4 +1,4 @@
-@extends('dashboard')
+@extends('layouts.app')
 
 @section('title')
 {{$lieu->nom}}
@@ -17,12 +17,12 @@
             <div class="col-lg-6 d-flex justify-content-center">
                 <div class="row">
                     <div class="card">
-                    <div class="col-lg-3">
+                    <div class="col">
                         <div class="face front ">
                             <img src="{{ $lieu->image }}" alt="Photo du {{$lieu->nom}}">
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col">
                         <div class="face back">
                             <div class="contenu">
                                 <h2>{{$lieu->nom}}</h2>
@@ -53,12 +53,14 @@
     </div>
         <div class="row">
             <div id="comment" class="col ajoutForm">
+
                 <!--------------- FORMULAIRE D'AJOUT D'UN COMMENTAIRE -------------->
+
                 <form id="formAdd" method="post" action="{{ route('commentaires.store') }}">
                     <h4>Ajouter votre commentaire</h4>
                     @csrf
                     <div class="form-group formWrapper">
-                        <textarea class="form-control" name="commentaire"></textarea>
+                        <textarea class="form-control" name="commentaire" placeholder="Pour mettre un commentaire à ce post, c'est ici."></textarea>
                         <input type="hidden" name="lieu_id" value="{{ $lieu->id }}" />
                     </div>
                     <div class="form-group d-flex justify-content-end mt-2">

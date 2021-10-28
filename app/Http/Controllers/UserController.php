@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Lieu;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Gate;
 
 
 class UserController extends Controller
@@ -18,8 +19,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('user.index', compact('users'));
+        if (Gate::allows('isAdmin') == true) {
+            $users = User::all();
+            return view('user.index', compact('users'));
+        } else {
+            return abort(403, 'Action non autorisée.');
+        }
     }
     /**
      * Display the specified resource.
@@ -33,17 +38,6 @@ class UserController extends Controller
                                     ->latest()
                                     ->paginate(2);
         return view('user.show', compact('user', 'lieux'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        return view('user.edit', compact('user'));
     }
 
     /**
@@ -87,7 +81,7 @@ class UserController extends Controller
 
         $request->validate([
             'oldPassword' => 'required',
-            'newPassword' => 'required|confirmed|max:15',
+            'newPassword' => 'required|confirmed|max:25',
                 Password::min(8)
                     ->mixedCase()
                     ->letters()

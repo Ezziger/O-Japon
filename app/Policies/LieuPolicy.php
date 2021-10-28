@@ -10,7 +10,7 @@ class LieuPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user, $ability) {
+    public function before(User $user) {
         if ($user->estAdministrateur()) {
             return true;
         }
@@ -23,7 +23,7 @@ class LieuPolicy
      * @param  \App\Models\Lieu  $lieu
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Lieu $lieu)
+    public function view()
     {
         return true;
     }
@@ -34,7 +34,7 @@ class LieuPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create()
     {
         return true;
     }

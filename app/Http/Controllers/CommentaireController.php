@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Commentaire;
 
-
 class CommentaireController extends Controller
 {
     /********** STOCKE UN COMMENTAIRE EN BASE DE DONNEES **********/
-
+    
     public function store(Request $req) {
         $req->validate([
             'commentaire' => 'required',

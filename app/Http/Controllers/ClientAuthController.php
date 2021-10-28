@@ -30,7 +30,7 @@ class ClientAuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('lieu')
+            return redirect()->intended('home')
                         ->withSuccess('Vous êtes connecté(e).');
         }
 
@@ -57,7 +57,7 @@ class ClientAuthController extends Controller
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect("dashboard")->withSuccess('You have signed-in');
+        return redirect("home")->withSuccess('You have signed-in');
     }
 
 
@@ -75,7 +75,7 @@ class ClientAuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('dashboard');
+            return view('home');
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');

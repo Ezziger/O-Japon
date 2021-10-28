@@ -22,13 +22,7 @@ class LieuController extends Controller
      */
     public function index()
     {
-        $lieux = Lieu::with('categorie', 'region', 'user')
-                     ->join('categories', 'lieus.categorie_id', '=', 'categories.id')
-                     ->join('regions', 'lieus.region_id', '=', 'regions.id')
-                     ->join('users', 'lieus.user_id', '=', 'users.id')
-                     ->withCount('commentaires_reponses')
-                     ->paginate(5);
-        return view('lieu.index', compact('lieux'));
+       
     }
 
     /**
@@ -91,8 +85,8 @@ class LieuController extends Controller
      */
     public function show(Lieu $lieu)
     {
-        $commentaires = Commentaire::all();
-        return view('lieu.show', compact('lieu', 'commentaires'));
+        $lieu->load('commentaires');
+        return view('lieu.show', compact('lieu'));
     }
 
     /**
@@ -138,7 +132,7 @@ class LieuController extends Controller
         }
         
         $lieu->update($majLieu);
-        return redirect()->route('lieu.index')
+        return redirect()->route('home')
                          ->with('success', 'Votre lieu a été modifié avec succès !');
     }
 
@@ -152,15 +146,14 @@ class LieuController extends Controller
     {
         $this->authorize('delete', $lieu);
         $lieu->delete();
-        return redirect()->route('lieu.index')
+        return redirect()->route('home')
                          ->with('success', 'Le lieu a bien été supprimé !');
     }
 
     public function search() {
         $q = request()->input('q');
 
-        $lieux = Lieu::with('categorie', 'region')
-                     ->join('categories', 'lieus.categorie_id', '=', 'categories.id')
+        $lieux = Lieu::join('categories', 'lieus.categorie_id', '=', 'categories.id')
                      ->join('regions', 'lieus.region_id', '=', 'regions.id')
                      ->where("nom", "like", "%$q%")
                      ->orWhere("description", "like", "%$q%")

@@ -1,8 +1,29 @@
-@extends('dashboard')
+@extends('layouts.app')
 @section('title', 'Les lieux à visiter au Japon')
 @section('content')
 
-<div class="banniere"></div>
+<div class="banniere">
+<div class="container">
+    <div class="row presentation">
+        <div class="col p-0">
+            <h1>Bienvenue sur <span style="color: red;">O</span> Japon.</h1>
+            <p> Le but de ce site avant tout communautaire est de référencer les endroits interessants, insolites et méconnus situés sur l'archipel
+                japonais par le biais des utilisateurs du site dans des domaines divers et variés comme les monuments, les bars et restaurants, les activités de divertissements,
+                etc...<br /><br />
+                De ce fait, une fois votre inscription terminée, vous aurez la possibilité de partager un ou plusieurs lieux et ainsi donner la possibilité à d'autres
+                personnes de découvrir les joyaux du Japon !<br />
+                Dans chaque page détail d'un lieu, vous aurez la possibilité de commenter le lieu en question mais aussi d'interagir avec l'auteur ou d'autres utilisateurs afin
+                d'obtenir des renseignements<br /><br />
+                Je vous souhaite une bonne visite de mon site et un bon futur voyage au Japon !</p>
+        </div>
+        <div class="row p-0 m-auto">
+            <div class="col d-flex justify-content-end p-0">
+                <a href="{{ route('lieu.create') }}" class="btn btn-light m-0 callToAction">Partagez votre lieu dès maintenant</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <div class="container w-50 text-center p-3">
 
     @if(session()->has('success'))
@@ -21,18 +42,6 @@
 
 </div>
 <div class="container">
-    <div class="row presentation">
-        <div class="col">
-            <p>Bienvenue sur O Japon. Le but de ce site avant tout communautaire est de référencer les endroits interessants, insolites et méconnus situés sur l'archipel
-                japonais par le biais des utilisateurs du site dans des domaines divers et variés comme les monuments, les bars et restaurants, les activités de divertissements,
-                etc...<br /><br />
-                De ce fait, une fois votre inscription terminée, vous aurez la possibilité de partager un ou plusieurs lieux et ainsi donner la possibilité à d'autres
-                personnes de découvrir les joyaux du Japon !<br />
-                Dans chaque page détail d'un lieu, vous aurez la possibilité de commenter le lieu en question mais aussi d'interagir avec l'auteur ou d'autres utilisateurs afin
-                d'obtenir des renseignements<br /><br />
-                Je vous souhaite une bonne visite de mon site et un bon futur voyage au Japon !</p>
-        </div>
-    </div>
     <div class="row">
         <div class="col">
             <h2>Les dernières destinations postées</h2>
@@ -41,10 +50,10 @@
 
     @foreach($lieux as $lieu)
     <div class="row postcard light">
-        <div class="col-md-6 col-lg-2 p-0">
+        <div class="col-md-6 col-lg-3 p-0">
             <img class="postcard_img" src="{{ $lieu->image }}" alt="{{ $lieu->nom }}">
         </div>
-        <div class="col-md-6 col-lg-10 p-0">
+        <div class="col-md-6 col-lg-9 p-0">
             <div class="postcard_details">
                 <div>
                     <div class="d-flex justify-content-between align-center">
@@ -54,17 +63,20 @@
                         <form class="favorites" action="{{ route('favoris.destroy', $lieu) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" data-toggle="tooltip" data-placement="bottom" title="Retirer de vos favoris"><i class="fas fa-heart"></i></button>
+                            <button type="submit" data-toggle="tooltip" data-placement="bottom" title="Retirer de vos favoris">
+                                <i class="fas fa-heart"></i>
+                            </button>
                             <input type="hidden" name="lieuId" value="{{ $lieu->id }}">
                         </form>
                         @else
                         <form class="favorites" action="{{ route('favoris.store') }}" method="POST">
                             @csrf
-                            <button type="submit" data-toggle="tooltip" data-placement="bottom" title="Ajouter à vos favoris"><i class="far fa-heart"></i></button>
+                            <button type="submit" data-toggle="tooltip" data-placement="bottom" title="Ajouter à vos favoris">
+                                <i class="far fa-heart"></i>
+                            </button>
                             <input type="hidden" name="lieuId" value="{{ $lieu->id }}">
                         </form>
                         @endif
-                        @else
                         @endif
                     </div>
                     <div class="postcard_creation small">

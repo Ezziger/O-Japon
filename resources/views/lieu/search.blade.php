@@ -1,4 +1,4 @@
-@extends('dashboard')
+@extends('layouts.app')
 @section('title', 'Les lieux à visiter au Japon')
 @section('content')
 

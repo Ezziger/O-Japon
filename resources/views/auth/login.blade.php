@@ -1,12 +1,12 @@
-@extends('dashboard')
+@extends('layouts.app')
 
 @section('content')
-<main class="login-form">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-4 p-4 signInWrapper">
+<main class="login-form m-0">
+    <div class="container-fluid background backgroundLogin">
+        <div class="row centrage">
+        <div class="col-md-6 col-xl-4 p-4 signInWrapper gif mb-5">
                 <div class="card-body">
-                    <h3 class="text-center">Connexion</h3>
+                    <h2 class="text-center">Connexion</h2>
                     <form method="POST" action="{{ route('login.client') }}">
                         @csrf
                         <div class="form-group mb-3">
@@ -22,7 +22,7 @@
                             @endif
                         </div>
                         <div class="d-grid mx-auto">
-                            <button type="submit" class="btn">Se connecter</button>
+                            <button type="submit" class="btn btn-light btn-sm mt-4">Se connecter</button>
                         </div>
                     </form>
                     <span>Vous n'avez pas de compte? <a href="{{ route('register-user') }}">Inscription</a></span>
