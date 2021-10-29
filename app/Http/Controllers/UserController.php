@@ -50,8 +50,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $majUser = $request->validate([
-            'nom' => 'required|string|min:3|max:30',
-            'prenom' => 'required|string|min:3|max:30',
+            'pseudo' => 'required|string|min:3|max:30',
             'email' => 'required|string|min:5|max:40',
         ]);
 

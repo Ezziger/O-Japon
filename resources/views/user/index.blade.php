@@ -8,7 +8,7 @@
         @foreach($users as $user)
         <div class="card cardHeigth" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title text-center">{{ $user->prenom }}</h5>
+                <h5 class="card-title text-center">{{ $user->pseudo }}</h5>
                 <div class="d-flex justify-content-center">
                     <form action="{{ route('user.destroy', $user) }}" method="POST">
                         @csrf

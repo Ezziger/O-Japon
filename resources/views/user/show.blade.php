@@ -12,12 +12,8 @@
                     @csrf
                     @method('PATCH')
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom" name="nom" value="{{ $user->nom }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="prenom" class="form-label">Prenom</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $user->prenom }}" required>
+                        <label for="pseudo" class="form-label">Pseudonyme</label>
+                        <input type="text" class="form-control" id="pseudo" name="pseudo" value="{{ $user->pseudo }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -89,7 +85,7 @@
                     </div>
                     <div class="postcard_creation small">
                         <i class="fas fa-calendar-alt"></i>
-                        <span> Posté par <a href="{{ route('user.show', $lieu->user_id) }}">{{ $lieu->user->prenom }}</a>, le <time>{{ $lieu->created_at->format('Y-m-d') }}</time></span>
+                        <span> Posté par <a href="{{ route('user.show', $lieu->user_id) }}">{{ $lieu->user->pseudo }}</a>, le <time>{{ $lieu->created_at->format('Y-m-d') }}</time></span>
                     </div>
                     <div class="postcard_bar"></div>
                 </div>

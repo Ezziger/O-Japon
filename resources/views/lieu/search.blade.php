@@ -15,7 +15,7 @@
                         <h1 class="">{{ $lieu->nom }}</h1>
                         <div class="postcard_creation small">
                             <i class="fas fa-calendar-alt"></i>
-                            <span> Posté par <a href="{{ route('user.show', $lieu->user_id) }}">{{ $lieu->user->prenom }}</a>, le <time>{{ $lieu->created_at->format('Y-m-d') }}</time></span>
+                            <span> Posté par <a href="{{ route('user.show', $lieu->user_id) }}">{{ $lieu->user->pseudo }}</a>, le <time>{{ $lieu->created_at->format('Y-m-d') }}</time></span>
                         </div>
                         <div class="postcard_bar"></div>
                     </div>

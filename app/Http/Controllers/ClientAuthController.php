@@ -48,8 +48,7 @@ class ClientAuthController extends Controller
     public function clientRegistration(Request $request)
     {
         $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
+            'pseudo' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|string|min:8|max:15|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$/',
         ]);
@@ -64,8 +63,7 @@ class ClientAuthController extends Controller
     public function create(array $data)
     {
       return User::create([
-        'nom' => $data['nom'],
-        'prenom' => $data['prenom'],
+        'pseudo' => $data['pseudo'],
         'email' => $data['email'],
         'password' => Hash::make($data['password'])
       ]);

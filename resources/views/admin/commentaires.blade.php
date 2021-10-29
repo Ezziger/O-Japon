@@ -18,7 +18,7 @@
                 <!-- Avatar du posteur -->
             </div>
             <div class="col-md-9">
-                <span>posté par : <strong>{{ $commentaire->user->prenom }} {{ $commentaire->user->nom }}</strong>, le {{ $commentaire->created_at }}</span>
+                <span>posté par : <strong>{{ $commentaire->user->pseudo }}</strong>, le {{ $commentaire->created_at }}</span>
             </div>
         </div>
         <!--Bot Wrapper-->

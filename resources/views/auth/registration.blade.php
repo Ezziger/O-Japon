@@ -10,15 +10,9 @@
                     <form action="{{ route('register.client') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
-                            <input type="text" placeholder="Nom" id="nom" class="form-control" name="nom" required>
-                            @if ($errors->has('nom'))
-                            <span class="text-danger">{{ $errors->first('nom') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group mb-3">
-                            <input type="text" placeholder="Prenom" id="prenom" class="form-control" name="prenom" required>
-                            @if ($errors->has('prenom'))
-                            <span class="text-danger">{{ $errors->first('prenom') }}</span>
+                            <input type="text" placeholder="Pseudonyme" id="pseudo" class="form-control" name="pseudo" required>
+                            @if ($errors->has('pseudo'))
+                            <span class="text-danger">{{ $errors->first('pseudo') }}</span>
                             @endif
                         </div>
                         <div class="form-group mb-3">

@@ -16,11 +16,11 @@ class CreateCommentairesTable extends Migration
         Schema::create('commentaires', function (Blueprint $table) {
             $table->id();
             $table->tinyText('commentaire');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('lieu_id');
+            $table->unsignedBigInteger('lieu_id');
             $table->foreign('lieu_id')->references('id')->on('lieus')->onDelete('cascade');
-            $table->integer('parent_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('parent_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

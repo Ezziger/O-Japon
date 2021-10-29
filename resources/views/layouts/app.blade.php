@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <nav id="topNav " class="navbar navbar-expand-lg navbar-light">
+    <nav id="topNav " class="navbar navbar-expand-lg navbar-light fixation">
         <div class="container-fluid">
             <div>
                 <form class="d-flex" action="{{ route('lieu.search') }}">
@@ -33,7 +33,7 @@
                 <a class="navbar-brand" href="{{route('home')}}" ><img src="/images/Logo_O_Japon_1.png"
                    alt="Logo du site O Japon" @guest style="margin: 0 150px;" @endguest></a>
                 @auth
-                <p class="nav-user-name">{{Auth::user()->prenom}}</p>
+                <p class="nav-user-name">{{Auth::user()->pseudo}}</p>
             </div>
             @endauth
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
