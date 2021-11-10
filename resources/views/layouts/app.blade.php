@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
-    <link href="./css/app.css" rel="stylesheet">
-    <script type="text/javascript" src="./js/script.js" defer></script>
+    <link href="/css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/script.js" defer></script>
 </head>
 
 <body>
